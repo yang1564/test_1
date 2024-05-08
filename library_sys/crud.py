@@ -51,29 +51,45 @@ def get_borrow_record(db: Session, user_id: str, book_code: str):
                                           models.Borrow.book_code == book_code).first()
 
 
-def generate_user_id() -> str:
-    return str(random.randint(100000, 999999))
+def generate_user_id():
+    all_ids = list(range(100000, 1000000))
+    unique_id = random.choice(all_ids)
+    all_ids.remove(unique_id)
+    return unique_id
 
 
-def generate_book_code() -> str:
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+def generate_book_code(db: Session) -> str:
+    while True:
+        book_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        existing_book = db.query(models.Book).filter(models.Book.code == book_code).first()
+        if not existing_book:
+            return book_code
 
 
 def create_user(db: Session, user: schemas.UserCreate):
     user_id = generate_user_id()
     db_user = models.User(email=user.email, name=user.name, id=user_id)
-    db.add(db_user)  # 添加到会话
-    db.commit()  # 提交到数据库
-    db.refresh(db_user)  # 刷新数据库
-    return db_user
+    try:
+        db.add(db_user)  # 添加到会话
+        db.commit()  # 提交到数据库
+        db.refresh(db_user)  # 刷新数据库
+        return db_user
+
+    except Exception as e:
+        db.rollback()
+        print(e)
 
 
 def create_book(db: Session, book: schemas.BookCreate):
     book_code = generate_book_code()
     db_book = models.Book(title=book.title, author=book.author, isbn_number=book.isbn_number,
                           available=True, code=book_code)
-    db.add(db_book)
-    db.commit()
-    db.refresh(db_book)
-    return db_book
+    try:
+        db.add(db_book)
+        db.commit()
+        db.refresh(db_book)
+        return db_book
 
+    except Exception as e:
+        db.rollback()
+        print(e)

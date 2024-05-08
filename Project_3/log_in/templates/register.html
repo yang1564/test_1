@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link href="../static/style_register.css" rel="stylesheet">
+</head>
+<body>
+    <div id="error-message" style="color: red;">
+        {% if error_message %}
+            {{ error_message }}
+        {% endif %}
+    </div>
+    <form method="post" action='/register'>
+        <label>用户名：<input type="text" name="user" value=""></label><br>
+        <label>密 码：<input type="password" name="password" id="password" value="" minlength="6"></label><br>
+        <span id="password-info" style="color: gray; font-size: 12px;">密码至少为6位,并且需要包含至少一个字母和特殊符号!</span><br>
+        <label>确 认：<input type="password" name="confirm_password" value=""></label><br>
+        <span id="confirm-info" style="color: gray; font-size: 12px;">两次密码需要保持一致!</span><br>
+        <input type="submit" value="注册">
+        <input type="button" value="返回" onclick="location.href='/book';">
+    </form>
+</body>
+</html>
+

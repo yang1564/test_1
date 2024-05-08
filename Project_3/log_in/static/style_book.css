@@ -1,0 +1,95 @@
+.top {
+    background-color: #f0f0f0;
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.top-ner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.welcome {
+    font-size: 18px;
+    margin-left: 600px;
+}
+
+.dlzc input[type="button"]{
+    padding: 5px 10px;
+    border: none;
+    background-color: #337ab7;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.dlzc input[type="button"]:hover {
+    background-color: #286090;
+}
+
+
+body,ul,li{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+
+#navbar{
+	width:100%;
+	height:42px;
+	background:rgb(28, 75, 169);
+
+}
+
+#navbar ul{
+	background:rgb(28, 75, 169);
+	width:1500px;
+	margin: 0 auto;/* 水平居中 */
+}
+
+#navbar ul li{/* 父子选择器.这里设置的是ul里的li （一级菜单），如 网站首页、学院概况*/
+	width:150px;
+	height:42px;
+	padding-left: 0;
+	display: inline-block;
+	text-align: center;
+}
+
+#navbar>ul>li{/* 子代选择器，这里的li就是一级菜单，只让一级菜单水平，二级菜单垂直 */
+	float:left;/* 浮动:让元素依次水平 */
+}
+
+#navbar a{
+	text-decoration: none;/* 去掉下划线 */
+	/* text-decoration: underline; 下划线*/
+	/* text-decoration: overline;线在上面 */
+	color: #fff;/* 字体颜色为白色 */
+	text-align: center;
+	line-height: 42px;/*行高*/
+	font-size: 14px;
+
+}
+#navbar a:hover{/* 伪类选择器 ，设置鼠标悬停时的样式*/
+	text-decoration: underline;
+	color:orange;
+}
+
+#navbar li ul{/* 父子选择器,设置的是li里的ul（二级菜单），如学校要闻、系统概述 */
+	display: none;/* 隐藏元素 */
+	 width: 120px;
+	 text-align: center;
+	 float: left;
+	/* text-align: left; */
+}
+
+#navbar>ul>li:hover ul{/*hover的不是li，而是li的孩子ul （通过li选择到孩子里的ul） */
+	display:block;
+	width: 160px;
+	font-size: 6px;
+	/* 显示元素 */
+}
+
+
