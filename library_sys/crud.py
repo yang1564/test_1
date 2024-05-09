@@ -81,8 +81,8 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 
 def create_book(db: Session, book: schemas.BookCreate):
-    book_code = generate_book_code()
-    db_book = models.Book(title=book.title, author=book.author, isbn_number=book.isbn_number,
+    book_code = generate_book_code(db)
+    db_book = models.Book(title=book.title, author=book.author,
                           available=True, code=book_code)
     try:
         db.add(db_book)

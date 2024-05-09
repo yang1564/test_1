@@ -5,7 +5,6 @@ from pydantic import BaseModel, field_validator
 class BookBase(BaseModel):
     title: str
     author: str
-    isbn_number: str
     code: Optional[str]
 
 
